@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import AddContent from "../AddContent";
 import ShowContent from "../ShowContent";
 
 const Arturo = () => {
   const [task, setTask] = useState([]);
+
+  useEffect(() => {
+    setTask(JSON.parse(localStorage.getItem("task")));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("task", JSON.stringify(task));
+  }, [task]);
 
   function GetState(text) {
     setTask([...task, { task: text }]);
@@ -19,5 +27,3 @@ const Arturo = () => {
 };
 
 export default Arturo;
-
-/* localStorage.setItem("tareas", JSON.stringify(task)); */
