@@ -3,25 +3,23 @@ import TextArea from "../TextArea";
 import Button from "../Button";
 import style from "./style.module.scss";
 
-const AddContent = () => {
+const AddContent = ({ state }) => {
   const [text, setText] = useState("");
-  const [task] = useState([]);
 
   function ChangeText(e) {
     setText(e.target.value);
   }
 
   function AddTask() {
-    task.push({ tarea: text });
-    localStorage.setItem("tareas", JSON.stringify(task));
+    state(text);
     setText("");
   }
 
   return (
-    <section className={style.addContent}>
+    <div className={style.addContent}>
       <TextArea value={text} change={ChangeText} />
       {text !== "" ? <Button click={AddTask} value={"Agregar Tarea"} /> : null}
-    </section>
+    </div>
   );
 };
 
